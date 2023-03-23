@@ -1,4 +1,3 @@
-import * as pg from "pg";
 import mysql from "mysql2";
 
 export const pool = mysql
