@@ -1,0 +1,83 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anek+Odia:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-gray-100 font-['Anek_Odia'] p-3">
+    <a href="/create" class="px-5 py-2 rounded bg-[#3b82f6] text-gray-50">
+      Create party polls
+    </a>
+    <div class="max-w-lg lg:max-w-5xl mx-auto">
+      <p class="font-bold text-2xl text-center underline mb-5 pt-5">
+        Result for any individual Polling Unit
+      </p>
+      <div class="mb-3">
+        <form action="/" method="post" class="space-x-3">
+          <select
+            name="filter"
+            id="lga-filter"
+            class="p-2 outline-none rounded-md"
+            required
+          >
+            <option value="">Select LGA</option>
+            <% lgas.forEach(element => { %>
+            <option value="<%= element %>"><%= element %></option>
+            <% }) %>
+          </select>
+
+          <button class="px-5 py-2 rounded bg-[#3b82f6] text-gray-50">
+            filter and get total
+          </button>
+        </form>
+        <% if (filter) { %>
+        <div>
+          <p class="text-md text-left">
+            Showing results for
+            <span class="font-semibold text-blue-500"><%= filter %></span>
+          </p>
+          <p class="text-md text-left">
+            Total result of polling unit under
+            <span class="font-semibold text-blue-500"
+              ><%= filter %> : <%= data.reduce((sum, value) => sum +
+              value.party_score, 0) %></span
+            >
+          </p>
+        </div>
+
+        <% } %>
+      </div>
+      <div class="min-h-[30px] grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <% data.forEach(element => { %>
+        <div
+          class="space-y-2 text-center bg-white rounded-lg p-3 hover:scale-105"
+        >
+          <p class="text-lg text-center capitalize font-semibold">
+            <%= element.polling_unit_name %> <br />
+            <span class="text-sm">Polling unit name</span>
+          </p>
+
+          <p class="text-lg text-center font-semibold">
+            <%= element.lga %> <br />
+            <span class="text-sm">LGA</span>
+          </p>
+          <p class="text-lg text-center font-semibold">
+            <%= element.party_abbreviation %> <br />
+            <span class="text-sm">Party abbreviation</span>
+          </p>
+          <p class="text-lg text-center font-semibold">
+            <%= element.party_score %> <br />
+            <span class="text-sm">party score</span>
+          </p>
+        </div>
+        <% }) %>
+      </div>
+    </div>
+  </body>
+</html>

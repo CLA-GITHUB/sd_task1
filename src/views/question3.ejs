@@ -1,0 +1,82 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anek+Odia:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-gray-100 font-['Anek_Odia'] p-3">
+    <a href="/" class="px-5 py-2 rounded bg-[#3b82f6] text-gray-50"> Back </a>
+    <div class="max-w-md mx-auto">
+      <p class="font-bold text-2xl text-center underline mb-5 pt-5">
+        Create result for All parties
+      </p>
+      <% if (message) { %>
+      <p><%= message %></p>
+      <% } %>
+      <form action="/create" method="post" class="space-y-3">
+        <select
+          name="polling_unit_uniqueid"
+          id="lga-filter"
+          class="w-full p-2 outline-none rounded-md"
+          required
+        >
+          <option value="">Select Polling unit</option>
+          <% pu.forEach(element => { %>
+          <option value="<%= element.uniqueid %>">
+            <%= element.polling_unit_name %>
+          </option>
+          <% }) %>
+        </select>
+        <br />
+
+        <input
+          class="w-full p-2 outline-none rounded-md"
+          name="party_abbreviation"
+          type="text"
+          placeholder="Enter party abbreviation"
+        />
+        <br />
+
+        <input
+          class="w-full p-2 outline-none rounded-md"
+          name="party_score"
+          type="number"
+          placeholder="Enter party score"
+        />
+        <br />
+
+        <input
+          class="w-full p-2 outline-none rounded-md"
+          name="entered_by_user"
+          type="text"
+          placeholder="Entered by user"
+        />
+        <br />
+
+        <input
+          class="w-full p-2 outline-none rounded-md"
+          name="date_entered"
+          type="datetime-local"
+          placeholder="Date entered"
+        />
+        <br />
+
+        <input
+          class="w-full p-2 outline-none rounded-md"
+          name="user_ip_address"
+          type="text"
+          placeholder="user ip address"
+        />
+        <button class="px-5 py-2 rounded bg-[#3b82f6] text-gray-50">
+          Create
+        </button>
+      </form>
+    </div>
+  </body>
+</html>
