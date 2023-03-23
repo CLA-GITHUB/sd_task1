@@ -3,10 +3,10 @@ import mysql from "mysql2";
 
 export const pool = mysql
   .createPool({
-    host: "containers-us-west-90.railway.app",
+    host: process.env.HOST,
     user: "root",
-    password: "Of8COFtzcP4F3vx1D9Ks",
-    database: "railway",
+    password: process.env.PASSWORD,
+    database: process.env.DATABASE,
     port: 5443,
   })
   .promise();
